@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Tralalalalal wojtek Branch</Text>
+      <Text>Tralalalalal wojtek Branch123</Text>
       <View>
         <Text>HEHEHEHA</Text>
       </View>
