@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   return (
@@ -9,6 +11,10 @@ export default function App() {
         <Text>HEHEHEHA</Text>
       </View>
       <StatusBar style="auto" />
+
+      <View>
+        This is rudy's branch, we love dogs and we are certainly not racist
+      </View>
     </View>
   );
 }
