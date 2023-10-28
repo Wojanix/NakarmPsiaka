@@ -1,55 +1,46 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import MapScreen from "./src/screens/MapScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
+import AboutUsScreen from "./src/screens/AboutUsScreen";
+import MyAnimalsScreen from "./src/screens/MyAnimalsScreen";
+import {
+	SCREEN_SETTINGS,
+	SCREEN_MAP,
+	SCREEN_ABOUT_US,
+	SCREEN_MY_ANIMALS,
+} from "./src/constants/strings";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Tralalalalal wojtek Branch1234567</Text>
-      <View>
-        <Text>HEHEHEHA</Text>
-      </View>
-      <StatusBar style="auto" />
+const Stack = createNativeStackNavigator();
 
-      <MapView
-        style={styles.map}
-        region={{
-          latitude: 52.226918,
-          longitude: 21.00824,
-          latitudeDelta: 0.015,
-          longitudeDelta: 0.0121,
-        }}
-      >
-        <Marker
-          title="Menel"
-          description="Menel heh"
-          coordinate={{
-            latitude: 52.176047,
-
-            longitude: 21.064444,
-          }}
-          centerOffset={{ x: -18, y: -60 }}
-          anchor={{ x: 0.69, y: 1 }}
-        ></Marker>
-      </MapView>
-      <View>
-        <Text>
-          This is rudy's branch, we love dogs and we are certainly not racist
-        </Text>
-      </View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    height: "100vh",
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});
+const App = () => {
+	return (
+		<NavigationContainer>
+			<Stack.Navigator
+				initialRouteName={SCREEN_MAP}
+				screenOptions={{ headerTitleAlign: "center" }}>
+				<Stack.Screen
+					name={SCREEN_MAP}
+					component={MapScreen}
+					options={{ title: "Map", headerShown: false }}
+				/>
+				<Stack.Screen
+					name={SCREEN_SETTINGS}
+					component={SettingsScreen}
+					options={{ title: "Settings" }}
+				/>
+				<Stack.Screen
+					name={SCREEN_ABOUT_US}
+					component={AboutUsScreen}
+					options={{ title: "About us" }}
+				/>
+				<Stack.Screen
+					name={SCREEN_MY_ANIMALS}
+					component={MyAnimalsScreen}
+					options={{ title: "My animals" }}
+				/>
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
+};
+export default App;
