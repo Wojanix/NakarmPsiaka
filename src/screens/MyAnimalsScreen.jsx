@@ -4,8 +4,8 @@ import {
 	SafeAreaView,
 	StyleSheet,
 	TouchableWithoutFeedback,
-	View,
 } from "react-native";
+import Animated, { FadeOut } from "react-native-reanimated";
 import Animal from "../components/MyAnimalsComponents/Animal";
 import { COLOR_MAIN_BG } from "../constants/colors";
 import { animalData } from "../constants/testData";
@@ -18,17 +18,21 @@ const MyAnimalsScreen = () => {
 	// * the TouchableWithoutFeedback, has been added only for test purposes too
 	const [isLoading, setIsLoading] = useState(true);
 
+	// will fetch in the future
+	const handlePress = () => {
+		setIsLoading(!isLoading);
+	};
+
 	return (
 		<SafeAreaView style={container}>
 			{isLoading ? (
-				<TouchableWithoutFeedback
-					onPress={() => setIsLoading(!isLoading)}>
-					<View>
+				<TouchableWithoutFeedback onPress={() => handlePress()}>
+					<Animated.View exiting={FadeOut}>
 						<SkeletonView />
 						<SkeletonView />
 						<SkeletonView />
 						<SkeletonView />
-					</View>
+					</Animated.View>
 				</TouchableWithoutFeedback>
 			) : (
 				<FlatList
