@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Separator from "../Separator";
 import {
 	COLOR_MAIN_TEXT,
@@ -7,22 +7,31 @@ import {
 	COLOR_TERTIARY_TEXT,
 } from "../../constants/colors";
 import { MAX_BREED_LENGTH } from "../../constants/values";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Animal = ({ id, name, type, breed, info, imgPath }) => {
-	const { image, nameStyle, idStyle, breedStyle, infoStyle, wrapper } =
-		styles;
+	const {
+		image,
+		nameStyle,
+		idStyle,
+		breedStyle,
+		infoStyle,
+		wrapper,
+		firstWrapper,
+		secondWrapper,
+	} = styles;
 
 	return (
 		<View>
 			<View style={wrapper}>
-				<View>
+				<View style={firstWrapper}>
 					<Image
 						source={require("./../../../assets/dogImage.png")}
 						style={image}
 						alt={imgPath} // for tests
 					/>
 				</View>
-				<View>
+				<View style={secondWrapper}>
 					<Text style={nameStyle}>{name}</Text>
 					<Text style={idStyle}>#id:{id}</Text>
 
@@ -41,6 +50,7 @@ const Animal = ({ id, name, type, breed, info, imgPath }) => {
 
 					<Text style={infoStyle}>{info}</Text>
 				</View>
+				<InfoButton />
 			</View>
 			<Separator />
 		</View>
@@ -50,12 +60,23 @@ const Animal = ({ id, name, type, breed, info, imgPath }) => {
 const styles = StyleSheet.create({
 	wrapper: {
 		flexDirection: "row",
-		padding: 10,
-		gap: 5,
+		margin: 10,
+		justifyContent: "space-between",
+		width: "100%",
+	},
+	firstWrapper: {
+		width: "35%",
+		aspectRatio: "1/1",
+	},
+	secondWrapper: {
+		width: "45%",
+	},
+	thirdWrapper: {
+		width: "1",
 	},
 	image: {
-		width: 150,
-		height: 150,
+		width: "100%",
+		height: "100%",
 		borderRadius: 16,
 	},
 	nameStyle: {
@@ -78,7 +99,29 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		color: COLOR_SECONDARY_TEXT,
 		fontWeight: "300",
+		width: 210,
 	},
 });
+
+const InfoButton = () => {
+	const { thirdWrapper } = styles;
+
+	return (
+		<View style={thirdWrapper}>
+			<TouchableOpacity
+				style={{
+					marginTop: -10,
+					marginRight: 20,
+					padding: 15,
+				}}>
+				<MaterialCommunityIcons
+					name="dots-vertical"
+					size={24}
+					color="black"
+				/>
+			</TouchableOpacity>
+		</View>
+	);
+};
 
 export default Animal;
