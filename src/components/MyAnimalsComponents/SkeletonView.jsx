@@ -5,15 +5,21 @@ import { COLOR_SKELETON_BG } from "../../constants/colors";
 
 const SkeletonView = () => {
 	const cardWidth = Dimensions.get("window").width - 25;
+	const imageWidth = 150;
+	const skeletonWidth = cardWidth - imageWidth - 50;
 	const { card } = styles;
 
 	return (
 		<View style={[card, { width: cardWidth }]}>
-			<Skeleton height={150} width={150} style={{ borderRadius: 16 }} />
+			<Skeleton
+				height={150}
+				width={imageWidth}
+				style={{ borderRadius: 16 }}
+			/>
 			<View>
 				<Skeleton
 					height={35}
-					width={120}
+					width={skeletonWidth - 40}
 					style={{ borderRadius: 8, marginTop: 1 }}
 				/>
 				<Skeleton
@@ -23,12 +29,12 @@ const SkeletonView = () => {
 				/>
 				<Skeleton
 					height={25}
-					width={160}
+					width={skeletonWidth - 20}
 					style={{ borderRadius: 8, marginTop: 10 }}
 				/>
 				<Skeleton
 					height={52}
-					width={190}
+					width={skeletonWidth}
 					style={{ borderRadius: 8, marginTop: 10 }}
 				/>
 			</View>
@@ -54,4 +60,5 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 	},
 });
+
 export default SkeletonView;
