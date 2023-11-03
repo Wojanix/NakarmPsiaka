@@ -168,10 +168,7 @@ const InfoButton = ({ showEditModal, setShowEditModal }) => {
 					marginRight: 20,
 					padding: 15,
 				}}
-				onPress={() => {
-					console.log(showEditModal);
-					setShowEditModal(true);
-				}}>
+				onPress={() => setShowEditModal(!showEditModal)}>
 				<MaterialCommunityIcons
 					name="dots-vertical"
 					size={24}
