@@ -6,6 +6,7 @@ import {
 	COLOR_SKELETON_GRADIENT,
 } from "../../constants/colors";
 
+// One field in skeleton loading animation
 const Skeleton = ({ width, height, style }) => {
 	const translateX = useRef(new Animated.Value(-width)).current;
 	useEffect(() => {

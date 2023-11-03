@@ -11,7 +11,9 @@ import { COLOR_MAIN_BG } from "../constants/colors";
 import { animalData } from "../constants/testData";
 import SkeletonView from "../components/MyAnimalsComponents/SkeletonView";
 
-const MyAnimalsScreen = () => {
+// navigation here is used to open edit animal screen in modal inside animal component
+// ? if there is a way to streamline this navigation it should be changed later
+const MyAnimalsScreen = ({ navigation }) => {
 	const { container } = styles;
 
 	// * only for test purposes, it will be set by fetch hook in future
@@ -38,7 +40,9 @@ const MyAnimalsScreen = () => {
 				<FlatList
 					data={animalData}
 					keyExtractor={(item) => item.id}
-					renderItem={({ item }) => <Animal {...item} />}
+					renderItem={({ item }) => (
+						<Animal {...item} navigation={navigation} />
+					)}
 				/>
 			)}
 		</SafeAreaView>
