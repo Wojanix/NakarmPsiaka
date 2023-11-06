@@ -12,7 +12,7 @@ import { MaterialIcons } from "@expo/vector-icons"; // edit button
 import { FontAwesome } from "@expo/vector-icons"; // remove button
 
 export default function SettingRecord(props) {
-  const { text, title, icon, som, index, iconSize, argFunction } = props;
+  const { text, title, icon, som, index, iconSize, argFunction, color } = props;
   argFunction ? argFunction() : "";
 
   console.log(argFunction);
@@ -22,8 +22,12 @@ export default function SettingRecord(props) {
 
   return (
     <Pressable
-      style={styles.container}
-      //   onPress={() => (argFunction ? argFunction() : "")}
+      style={[styles.container, { backgroundColor: color }]}
+      onPress={() => (argFunction ? argFunction() : "")}
+      android_ripple={{
+        color: argFunction ? COLOR_SECONDARY_TEXT : color,
+        borderless: false,
+      }}
     >
       <Text style={styles.icon}>
         <FontAwesome
