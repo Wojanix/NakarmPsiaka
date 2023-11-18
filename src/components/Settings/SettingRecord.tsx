@@ -30,9 +30,9 @@ export default function SettingRecord(props) {
       }}
     >
       <Text style={styles.icon}>
-        <FontAwesome
+        <MaterialCommunityIcons
           name={icon}
-          size={iconSize ? iconSize : 38}
+          size={iconSize ? iconSize : 42}
           color={"black"}
         />
       </Text>
@@ -63,10 +63,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderColor: "black",
     borderTopWidth: 0,
-    padding: 15,
+    padding: 13,
+    paddingLeft: 11,
+    paddingTop: 14,
   },
   icon: {
-    width: "12%",
+    width: "15%",
   },
   text: {
     width: "62%",
