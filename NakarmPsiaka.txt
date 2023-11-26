@@ -1,0 +1,32 @@
+Czy są podobne projekty do Nakarm Psiaka?
+
+Istnieją podobne projekty, jednakże żaden z nich nie jest kopią naszego projektu. Aplikacje, które są teraz w sklepie Play, polegają tylko na tresurze psów, rozpoznawania ich rasy, mapa z atrakcjami dla psów oraz zaznaczania na mapie zaginionych psów — co docelowo też będziemy mieli. Żadna z nich nie ma głównego założenia, które u nas jest — karmienie i pomaganie bezdomnym psom. Strony internetowe w sieci są tylko od pomagania zwierzakom w schroniskach poprzez przelewanie pieniędzy lub dostarczanie jedzenia co też finalnie będzie u nas.
+
+
+
+Podział pracy w zespole 
+
+Nasz zespół składa się z dwóch skoordynowanych osób. Robimy aplikację w React Native i dodamy backend w Java Spring Boot, która jest zamieszczona na Github. Każdy z nas posiada swojego brancha i mamy master brancha gdzie dodajemy nasze sprawdzone i działające zmiany. Pracą staramy się dzielić po równo. Pojedyncze strony w aplikacji są robione przez jedną osobę i przesyłane do mastera. Robiąc bardziej zaawansowaną stronę łączymy siły i zajmujemy się nią razem. Jeśli uplasujemy się w na wysokim miejsu lub dostaniemy pozytywny feedback od jury i innych, to będziemy kontynuowali naszą pracę nad front-endem i back-endem.
+
+
+
+Skąd czerpałeś inspirację do opracowania projektu?
+
+W zeszłym roku Pani od informatyki zachęcała nas bardzo i motywowała do uczestniczenia, lecz wtedy jeszcze nie byliśmy gotowi. Postanowilismy, jednak, że w tym roku na pewno weźmiemy udział i postaramy się wygrać. Chcielibyśmy wyjść z programowaniem poza mury szkolne. Taki konkurs to idealna okazja na pokazanie swoich możliwości. A skoro można przy okazji zrobić coś dla środowiska i charytatywnego to tym lepiej. 
+
+
+
+Abstrakt projektu
+
+
+Nakarm Psiaka to bardzo prosta, intuicyjna i darmowa aplikacja, która będzie się składała z wielu funkcji. Najważniejszym założeniem projektu jest pomaganie bezdomnym, opuszczonym zwierzętom. Po wejściu do aplikacji ukaże nam się mapa, na której będziemy mogli zaznaczyć spotkane zwierzę na ulicy. U innych osób posiadających aplikację pokaże się ten pies na mapie. Dzięki temu, jeśli ktoś np. mieszka blisko i chciałby mieć na koncie dobry uczynek, to weźmie resztki z domu i nakarmi nimi psa. Jeśli zwierzę znalezione nosi obrożę, to będzie można zaznaczyć, że jest to pies zgubiony, co ułatwi właścicielowi jego znalezienie.
+
+
+
+
+
+
+
+
+
+

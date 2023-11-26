@@ -4,6 +4,7 @@ import { COLOR_PRIMARY } from "../../constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const MainButton = ({
   text = "",
