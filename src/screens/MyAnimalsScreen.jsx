@@ -5,7 +5,7 @@ import {
 	StyleSheet,
 	TouchableWithoutFeedback,
 } from "react-native";
-import Animated, { FadeOut } from "react-native-reanimated";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import Animal from "../components/MyAnimalsComponents/Animal";
 import { COLOR_MAIN_BG } from "../constants/colors";
 import { animalData } from "../constants/testData";
@@ -55,7 +55,12 @@ const MyAnimalsScreen = () => {
 					)}
 				/>
 			) : (
-				<EditAnimal id={editId} />
+				<Animated.View exiting={FadeOut} entering={FadeIn}>
+					<EditAnimal
+						id={editId}
+						setShowEditComponent={setShowEditComponent}
+					/>
+				</Animated.View>
 			)}
 		</SafeAreaView>
 	);

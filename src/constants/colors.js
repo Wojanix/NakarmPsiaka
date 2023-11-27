@@ -4,6 +4,9 @@ export const COLOR_PRIMARY = "#BE1048";
 // main color of background
 export const COLOR_MAIN_BG = "#FFF";
 
+// button text color
+export const COLOR_BUTTON_TEXT_MAIN = "#FFF";
+
 // main color of text
 export const COLOR_MAIN_TEXT = "#000";
 
