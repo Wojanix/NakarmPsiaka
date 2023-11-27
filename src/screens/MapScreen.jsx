@@ -39,6 +39,7 @@ const MapScreen = ({ navigation }) => {
 				))}
 			</MapView>
 
+			{/* its a modal, otherwise it triggers rerender of whole map, which has some performance benefits */}
 			<Modal
 				animationType="slide"
 				transparent={true}
