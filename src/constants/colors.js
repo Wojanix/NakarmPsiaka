@@ -4,6 +4,9 @@ export const COLOR_PRIMARY = "#BE1048";
 // main color of background
 export const COLOR_MAIN_BG = "#FFF";
 
+// button text color
+export const COLOR_BUTTON_TEXT_MAIN = "#FFF";
+
 // main color of text
 export const COLOR_MAIN_TEXT = "#000";
 
@@ -13,7 +16,11 @@ export const COLOR_SECONDARY_TEXT = "#565656";
 // tertiary color of text mainly for settings explanations
 export const COLOR_TERTIARY_TEXT = "#888";
 
+// for main text on buttons
 export const COLOR_PRIMARY_BUTTON_TEXT = "#FFF";
+
+// for error and "dangerous" buttons
+export const COLOR_ERROR_BUTTON_BG = "#B00020";
 
 // color for separators
 export const COLOR_SEPARATORS = "#797272";
