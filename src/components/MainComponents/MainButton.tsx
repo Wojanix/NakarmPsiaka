@@ -15,13 +15,14 @@ const MainButton = ({
   onPress = null,
   icon = null,
   borderRadius = 20,
+  padding = 0,
 }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View
         style={[
           styles.button,
-          { backgroundColor: color, width, height, borderRadius },
+          { backgroundColor: color, width, height, borderRadius, padding },
         ]}
       >
         <Text
@@ -29,7 +30,7 @@ const MainButton = ({
             styles.buttonText,
             {
               fontSize,
-              lineHeight: height,
+              lineHeight: height - 2 * padding,
               color: "white",
             },
           ]}
