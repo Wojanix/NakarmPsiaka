@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import {
-	View,
-	Text,
-	Image,
-	StyleSheet,
-	TouchableOpacity,
-	Modal,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
 } from "react-native";
 import Separator from "../Separator";
 import {
+
 	COLOR_ERROR_BUTTON_BG,
 	COLOR_MAIN_BG,
 	COLOR_MAIN_TEXT,
@@ -22,6 +23,7 @@ import { MAX_BREED_LENGTH } from "../../constants/values";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { MaterialIcons } from "@expo/vector-icons"; // edit button
 import { FontAwesome } from "@expo/vector-icons"; // remove button
+
 
 const Animal = ({
 	id,
@@ -44,34 +46,36 @@ const Animal = ({
 		secondWrapper,
 	} = styles;
 
-	const [showEditModal, setShowEditModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
-	return (
-		<View>
-			<View style={wrapper}>
-				<View style={firstWrapper}>
-					<Image
-						source={require("./../../../assets/dogImage.png")}
-						style={image}
-						alt={imgPath} // for tests
-					/>
-				</View>
-				<View style={secondWrapper}>
-					<Text style={nameStyle}>{name}</Text>
-					<Text style={idStyle}>#id:{id}</Text>
+  return (
+    <View>
+      <View style={wrapper}>
+        <View style={firstWrapper}>
+          <Image
+            source={require("./../../../assets/dogImage.png")}
+            style={image}
+            alt={imgPath} // for tests
+          />
+        </View>
+        <View style={secondWrapper}>
+          <Text style={nameStyle}>{name}</Text>
+          <Text style={idStyle}>#id:{id}</Text>
 
-					{breed.length <= MAX_BREED_LENGTH ? (
-						<View>
-							<Text style={breedStyle}>
-								{type}, {breed}
-							</Text>
-						</View>
-					) : (
-						<View>
-							<Text style={breedStyle}>{type},</Text>
-							<Text style={breedStyle}>{breed}</Text>
-						</View>
-					)}
+          {breed.length <= MAX_BREED_LENGTH ? (
+            <View>
+              <Text style={breedStyle}>
+                {type}, {breed}
+              </Text>
+            </View>
+          ) : (
+            <View>
+              <Text style={breedStyle}>{type},</Text>
+              <Text style={breedStyle}>{breed}</Text>
+            </View>
+          )}
+
+
 
 					<Text style={infoStyle}>{info}</Text>
 				</View>
@@ -169,29 +173,28 @@ const styles = StyleSheet.create({
 		padding: 5,
 		borderRadius: 10,
 	},
+
 });
 
 const InfoButton = ({ showEditModal, setShowEditModal }) => {
-	const { thirdWrapper } = styles;
+  const { thirdWrapper } = styles;
 
-	return (
-		<View style={thirdWrapper}>
-			<TouchableOpacity
-				style={{
-					marginTop: -10,
-					marginRight: 20,
-					padding: 15,
-				}}
-				onPress={() => setShowEditModal(!showEditModal)}>
-				<MaterialCommunityIcons
-					name="dots-vertical"
-					size={24}
-					color="black"
-				/>
-			</TouchableOpacity>
-		</View>
-	);
+  return (
+    <View style={thirdWrapper}>
+      <TouchableOpacity
+        style={{
+          marginTop: -10,
+          marginRight: 20,
+          padding: 15,
+        }}
+        onPress={() => setShowEditModal(!showEditModal)}
+      >
+        <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
+      </TouchableOpacity>
+    </View>
+  );
 };
+
 
 const EditInfoModal = ({
 	showEditModal,
@@ -249,6 +252,7 @@ const EditInfoModal = ({
 			</View>
 		</Modal>
 	);
+
 };
 
 export default Animal;
