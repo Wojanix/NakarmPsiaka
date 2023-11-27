@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	FlatList,
 	SafeAreaView,
@@ -10,20 +10,26 @@ import Animal from "../components/MyAnimalsComponents/Animal";
 import { COLOR_MAIN_BG } from "../constants/colors";
 import { animalData } from "../constants/testData";
 import SkeletonView from "../components/MyAnimalsComponents/SkeletonView";
+import EditAnimal from "../components/MyAnimalsComponents/EditAnimal";
 
-// navigation here is used to open edit animal screen in modal inside animal component
-// ? if there is a way to streamline this navigation it should be changed later
-const MyAnimalsScreen = ({ navigation }) => {
+const MyAnimalsScreen = () => {
 	const { container } = styles;
 
 	// * only for test purposes, it will be set by fetch hook in future
 	// * the TouchableWithoutFeedback, has been added only for test purposes too
 	const [isLoading, setIsLoading] = useState(true);
 
+	const [editId, setEditId] = useState(); // id of an animal which will be edited, screen set visible by showEditComponent state
+	const [showEditComponent, setShowEditComponent] = useState(false); // tells if edit component is shown instead of a list
+
 	// will fetch in the future
 	const handlePress = () => {
 		setIsLoading(!isLoading);
 	};
+
+	useEffect(() => {
+		console.log(editId);
+	}, [editId]);
 
 	return (
 		<SafeAreaView style={container}>
@@ -36,14 +42,20 @@ const MyAnimalsScreen = ({ navigation }) => {
 						<SkeletonView />
 					</Animated.View>
 				</TouchableWithoutFeedback>
-			) : (
+			) : !showEditComponent ? (
 				<FlatList
 					data={animalData}
 					keyExtractor={(item) => item.id}
 					renderItem={({ item }) => (
-						<Animal {...item} navigation={navigation} />
+						<Animal
+							{...item}
+							setEditId={setEditId}
+							setShowEditComponent={setShowEditComponent}
+						/>
 					)}
 				/>
+			) : (
+				<EditAnimal id={editId} />
 			)}
 		</SafeAreaView>
 	);

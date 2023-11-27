@@ -4,13 +4,11 @@ import MapScreen from "./src/screens/MapScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import AboutUsScreen from "./src/screens/AboutUsScreen";
 import MyAnimalsScreen from "./src/screens/MyAnimalsScreen";
-import EditAnimalScreen from "./src/screens/EditAnimalScreen";
 import {
 	SCREEN_SETTINGS,
 	SCREEN_MAP,
 	SCREEN_ABOUT_US,
 	SCREEN_MY_ANIMALS,
-	SCREEN_EDIT_ANIMAL,
 } from "./src/constants/strings";
 
 const Stack = createNativeStackNavigator();
@@ -40,11 +38,6 @@ const App = () => {
 					name={SCREEN_MY_ANIMALS}
 					component={MyAnimalsScreen}
 					options={{ title: "My animals" }}
-				/>
-				<Stack.Screen
-					name={SCREEN_EDIT_ANIMAL}
-					component={EditAnimalScreen}
-					options={{ title: "Edit animal" }}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

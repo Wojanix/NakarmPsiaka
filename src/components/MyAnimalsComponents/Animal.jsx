@@ -21,9 +21,17 @@ import { MAX_BREED_LENGTH } from "../../constants/values";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { MaterialIcons } from "@expo/vector-icons"; // edit button
 import { FontAwesome } from "@expo/vector-icons"; // remove button
-import { SCREEN_EDIT_ANIMAL } from "../../constants/strings";
 
-const Animal = ({ id, name, type, breed, info, imgPath, navigation }) => {
+const Animal = ({
+	id,
+	name,
+	type,
+	breed,
+	info,
+	imgPath,
+	setEditId, // id of animal to edit
+	setShowEditComponent, // state for showing component in myAnimals screen, it will show edit instead of flat list (the mother component of this component)
+}) => {
 	const {
 		image,
 		nameStyle,
@@ -75,7 +83,10 @@ const Animal = ({ id, name, type, breed, info, imgPath, navigation }) => {
 			<EditInfoModal
 				showEditModal={showEditModal}
 				setShowEditModal={setShowEditModal}
-				navigation={navigation}
+				// for editing the animal
+				id={id}
+				setEditId={setEditId}
+				setShowEditComponent={setShowEditComponent}
 			/>
 		</View>
 	);
@@ -179,8 +190,20 @@ const InfoButton = ({ showEditModal, setShowEditModal }) => {
 	);
 };
 
-const EditInfoModal = ({ showEditModal, setShowEditModal, navigation }) => {
+const EditInfoModal = ({
+	showEditModal,
+	setShowEditModal,
+	id,
+	setEditId,
+	setShowEditComponent,
+}) => {
 	const { modalContainer, modalWrapper, editIcons, cancelButton } = styles;
+
+	const handleEditButton = () => {
+		setShowEditComponent(true);
+		setEditId(id);
+		setShowEditModal(false);
+	};
 
 	return (
 		<Modal
@@ -196,9 +219,7 @@ const EditInfoModal = ({ showEditModal, setShowEditModal, navigation }) => {
 								name="mode-edit"
 								size={40}
 								color="black"
-								onPress={() =>
-									navigation.navigate(SCREEN_EDIT_ANIMAL)
-								}
+								onPress={() => handleEditButton()}
 							/>
 						</TouchableOpacity>
 						<TouchableOpacity>
