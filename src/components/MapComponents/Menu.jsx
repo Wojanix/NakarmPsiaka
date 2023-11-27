@@ -6,6 +6,7 @@ import {
   SCREEN_MY_ANIMALS,
   SCREEN_SETTINGS,
 } from "../../constants/strings";
+import { FontAwesome } from "@expo/vector-icons";
 import MainButton from "../MainComponents/MainButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { AntDesign } from "@expo/vector-icons";
@@ -17,11 +18,9 @@ export default function Menu({ navigation }) {
     <View style={styles.container}>
       <MainButton
         style={styles.button}
-        icon={
-          <MaterialCommunityIcons name="dog" size={30} color={COLOR_PRIMARY} />
-        }
-        width={50}
-        height={50}
+        icon={<FontAwesome name="dollar" size={30} color={COLOR_PRIMARY} />}
+        width={55}
+        height={55}
         borderRadius={1000}
         padding={5}
         onPress={() => navigation.navigate(SCREEN_MY_ANIMALS)}
@@ -31,8 +30,8 @@ export default function Menu({ navigation }) {
       <View style={styles.middleButtons}>
         <MainButton
           style={styles.button}
-          width={50}
-          height={50}
+          width={55}
+          height={55}
           borderRadius={1000}
           padding={5}
           onPress={() => navigation.navigate(SCREEN_SETTINGS)}
@@ -42,13 +41,12 @@ export default function Menu({ navigation }) {
         />
         <MainButton
           style={styles.button}
-          onPress={() => navigation.navigate(SCREEN_ABOUT_US)}
           title="About us"
           width={60}
           height={60}
           borderRadius={1000}
           padding={5}
-          icon={<AntDesign name="team" size={40} color="white" />}
+          icon={<AntDesign name="plus" size={40} color="white" />}
         />
         <MainButton
           style={styles.buttonLeft}
@@ -59,8 +57,8 @@ export default function Menu({ navigation }) {
               color={COLOR_PRIMARY}
             />
           }
-          width={50}
-          height={50}
+          width={55}
+          height={55}
           borderRadius={1000}
           padding={5}
           color="white"
@@ -71,14 +69,12 @@ export default function Menu({ navigation }) {
 
       <MainButton
         style={styles.button}
-        icon={
-          <MaterialCommunityIcons name="dog" size={30} color={COLOR_PRIMARY} />
-        }
-        width={50}
-        height={50}
+        icon={<AntDesign name="team" size={24} color={COLOR_PRIMARY} />}
+        width={55}
+        height={55}
         borderRadius={1000}
         padding={5}
-        onPress={() => navigation.navigate(SCREEN_MY_ANIMALS)}
+        onPress={() => navigation.navigate(SCREEN_ABOUT_US)}
         title="My Animals"
         color={"white"}
       />
@@ -92,7 +88,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 70,
     padding: 5,
-    marginBottom: "13%",
+    marginBottom: "10%",
     marginHorizontal: "5%",
     bottom: 0,
     backgroundColor: "rgba(0,0,0,0.4)",
