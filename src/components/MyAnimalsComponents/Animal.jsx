@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Separator from "../Separator";
 import {
+	COLOR_ERROR_BUTTON_BG,
 	COLOR_MAIN_BG,
 	COLOR_MAIN_TEXT,
 	COLOR_MODAL_TRANSPARENT_BG,
@@ -141,14 +142,16 @@ const styles = StyleSheet.create({
 	// for modal
 	modalContainer: {
 		flex: 1,
-		justifyContent: "center",
+		justifyContent: "flex-end",
 		alignContent: "center",
 		alignItems: "center",
 		backgroundColor: COLOR_MODAL_TRANSPARENT_BG,
+		width: "100%",
 	},
 	modalWrapper: {
 		backgroundColor: COLOR_MAIN_BG,
 		color: COLOR_MAIN_TEXT,
+		width: "100%",
 		padding: 30,
 		borderRadius: 16,
 	},
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		alignContent: "center",
-		gap: 15,
+		gap: 100,
 	},
 	cancelButton: {
 		marginTop: 15,
@@ -226,7 +229,7 @@ const EditInfoModal = ({
 							<FontAwesome
 								name="remove"
 								size={40}
-								color="black"
+								color={COLOR_ERROR_BUTTON_BG}
 							/>
 						</TouchableOpacity>
 					</View>
@@ -237,6 +240,7 @@ const EditInfoModal = ({
 							style={{
 								color: COLOR_PRIMARY_BUTTON_TEXT,
 								fontSize: 20,
+								paddingHorizontal: 100,
 							}}>
 							Cancel
 						</Text>

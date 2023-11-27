@@ -16,7 +16,11 @@ export const COLOR_SECONDARY_TEXT = "#565656";
 // tertiary color of text mainly for settings explanations
 export const COLOR_TERTIARY_TEXT = "#888";
 
+// for main text on buttons
 export const COLOR_PRIMARY_BUTTON_TEXT = "#FFF";
+
+// for error and "dangerous" buttons
+export const COLOR_ERROR_BUTTON_BG = "#B00020";
 
 // color for separators
 export const COLOR_SEPARATORS = "#797272";
