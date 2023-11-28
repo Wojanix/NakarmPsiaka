@@ -11,7 +11,6 @@ import MainButton from "../MainComponents/MainButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { AntDesign } from "@expo/vector-icons";
 import { COLOR_PRIMARY } from "../../constants/colors";
-import { transform } from "typescript";
 
 export default function Menu({ navigation }) {
   return (
