@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const MainButton = ({
   text = "",
@@ -15,13 +16,14 @@ const MainButton = ({
   onPress = null,
   icon = null,
   borderRadius = 20,
+  padding = 0,
 }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View
         style={[
           styles.button,
-          { backgroundColor: color, width, height, borderRadius },
+          { backgroundColor: color, width, height, borderRadius, padding },
         ]}
       >
         <Text
@@ -29,7 +31,7 @@ const MainButton = ({
             styles.buttonText,
             {
               fontSize,
-              lineHeight: height,
+              lineHeight: height - 2 * padding,
               color: "white",
             },
           ]}
