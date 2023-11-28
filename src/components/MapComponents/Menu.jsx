@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView, Text, Button, StyleSheet, View } from "react-native";
 
 import {
   SCREEN_ABOUT_US,
+  SCREEN_CAMERA,
   SCREEN_MY_ANIMALS,
   SCREEN_SETTINGS,
 } from "../../constants/strings";
@@ -12,6 +13,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { AntDesign } from "@expo/vector-icons";
 import { COLOR_PRIMARY } from "../../constants/colors";
 import { transform } from "typescript";
+import { Camera, CameraType } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
 
 export default function Menu({ navigation }) {
   return (
@@ -47,6 +50,9 @@ export default function Menu({ navigation }) {
           borderRadius={1000}
           padding={5}
           icon={<AntDesign name="plus" size={40} color="white" />}
+          onPress={() => {
+            navigation.navigate(SCREEN_CAMERA);
+          }}
         />
         <MainButton
           style={styles.buttonLeft}
@@ -111,5 +117,8 @@ const styles = StyleSheet.create({
     transforms: {
       transform: [{ translateX: 500 }],
     },
+  },
+  camera: {
+    flex: 1,
   },
 });
