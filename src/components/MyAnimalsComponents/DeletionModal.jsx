@@ -20,7 +20,7 @@ const DeletionModal = ({ showDeleteModal, setShowDeleteModal, id }) => {
 					<Text style={{ fontSize: 20 }}>
 						Are you sure, you want to delete animal with id: #{id}
 					</Text>
-					<View>
+					<View style={styles.buttonContainer}>
 						<EditAnimalButton
 							text={"Delete"}
 							additionalStyles={{
@@ -56,6 +56,12 @@ const styles = StyleSheet.create({
 		borderRadius: 16,
 		borderColor: COLOR_ERROR_BUTTON_BG,
 		borderWidth: 5,
+	},
+	buttonContainer: {
+		justifyContent: "center",
+		marginTop: 10,
+		flexDirection: "row",
+		gap: 10,
 	},
 });
 
