@@ -70,7 +70,7 @@ export default function CameraScreen() {
   return (
     <View style={styles.container}>
       {image ? (
-        <ImageBackground source={{ uri: image }} style={styles.camera}>
+        <ImageBackground source={{ uri: image }} style={styles.container}>
           <View
             style={{
               position: "absolute",
@@ -111,12 +111,13 @@ export default function CameraScreen() {
           </View>
         </ImageBackground>
       ) : (
-        <Camera
-          style={styles.camera}
-          type={type}
-          flashMode={flash}
-          ref={cameraRef}
-        >
+        <View style={styles.container}>
+          <Camera
+            style={styles.camera}
+            type={type}
+            flashMode={flash}
+            ref={cameraRef}
+          ></Camera>
           <View
             style={{
               position: "absolute",
@@ -154,7 +155,7 @@ export default function CameraScreen() {
                 setFlash(
                   flash === Camera.Constants.FlashMode.off
                     ? Camera.Constants.FlashMode.on
-                    : Camera.Constants.FlashMode.on
+                    : Camera.Constants.FlashMode.off
                 );
               }}
             />
@@ -181,7 +182,7 @@ export default function CameraScreen() {
               }}
             />
           </View>
-        </Camera>
+        </View>
       )}
     </View>
   );
@@ -189,9 +190,13 @@ export default function CameraScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
   },
   camera: {
-    flex: 1,
+    // flex: 1,
+    width: "120%",
+    height: "100%",
+    position: "absolute",
   },
 });
