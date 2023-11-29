@@ -12,7 +12,6 @@ const MainButton = ({
   color = COLOR_PRIMARY,
   fontSize = 16,
   width = 100,
-  ifHalf = false,
   height = 50,
   onPress = null,
   icon = null,
@@ -20,16 +19,13 @@ const MainButton = ({
   padding = 0,
 }) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[
-        styles.button,
-        styleArg,
-        { backgroundColor: color, width, height, borderRadius, padding },
-        { width: ifHalf ? "50%" : width },
-      ]}
-    >
-      <View style={[styles.button, { width: "100%", height: "100%" }]}>
+    <TouchableOpacity onPress={onPress}>
+      <View
+        style={[
+          styles.button,
+          { backgroundColor: color, width, height, borderRadius, padding },
+        ]}
+      >
         <Text
           style={[
             styles.buttonText,
