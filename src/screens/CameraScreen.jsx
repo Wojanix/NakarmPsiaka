@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useLocation } from "react";
 import {
   SafeAreaView,
   Text,
@@ -11,6 +11,7 @@ import {
 
 import {
   SCREEN_ABOUT_US,
+  SCREEN_MAP,
   SCREEN_MY_ANIMALS,
   SCREEN_SETTINGS,
 } from "../constants/strings";
@@ -24,7 +25,7 @@ import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { Entypo } from "@expo/vector-icons";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -64,7 +65,7 @@ export default function CameraScreen() {
   };
 
   if (hasCameraPermission == false) {
-    return <Text>Fuck no permissi0n</Text>;
+    return <Text>Fuck no permission</Text>;
   }
   let zmienna = true;
   return (
@@ -145,7 +146,7 @@ export default function CameraScreen() {
                   name="flash"
                   size={32}
                   color={
-                    flash === Camera.Constants.FlashMode.off ? "white" : "grey"
+                    flash === Camera.Constants.FlashMode.off ? "grey" : "white"
                   }
                 />
               }
@@ -167,20 +168,34 @@ export default function CameraScreen() {
               bottom: 0,
               alignItems: "center",
               width: "100%",
+              backgroundColor: "rgba(0,0,0,0.8)",
             }}
           >
             <MainButton
               icon={<AntDesign name="camera" size={24} color="white" />}
               fontSize={22}
-              width={1000}
+              width={200}
               height={80}
-              color="rgba(0,0,0,0.8)"
+              color="rgba(0,0,0,0.0)"
               text="  Take photo"
               padding={8}
               onPress={() => {
                 takePicture();
               }}
             />
+            <View style={{ position: "absolute", right: 0 }}>
+              <MainButton
+                icon={<Entypo name="cross" size={34} color="white" />}
+                fontSize={26}
+                width={80}
+                height={80}
+                color="rgba(0,0,0,0.0)"
+                padding={8}
+                onPress={() => {
+                  navigation.navigate(SCREEN_MAP);
+                }}
+              />
+            </View>
           </View>
         </View>
       )}

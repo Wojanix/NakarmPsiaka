@@ -51,7 +51,7 @@ export default function Menu({ navigation }) {
           padding={5}
           icon={<AntDesign name="plus" size={40} color="white" />}
           onPress={() => {
-            navigation.navigate(SCREEN_CAMERA);
+            navigation.navigate(SCREEN_CAMERA, { navigation });
           }}
         />
         <MainButton
