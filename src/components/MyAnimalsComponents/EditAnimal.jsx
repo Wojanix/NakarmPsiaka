@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
 	header: {
 		paddingTop: 5,
 		paddingBottom: 20,
+		color: COLOR_SECONDARY_TEXT,
 	},
 	editWrapper: {
 		width: "100%",
