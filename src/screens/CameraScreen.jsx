@@ -20,7 +20,6 @@ import MainButton from "../components/MainComponents/MainButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { AntDesign } from "@expo/vector-icons";
 import { COLOR_PRIMARY } from "../constants/colors";
-import { transform } from "typescript";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { Entypo } from "@expo/vector-icons";
