@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   Image,
+  ImageBackground,
 } from "react-native";
 
 import {
@@ -21,6 +22,7 @@ import { COLOR_PRIMARY } from "../constants/colors";
 import { transform } from "typescript";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import { Entypo } from "@expo/vector-icons";
 
 export default function CameraScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -49,6 +51,18 @@ export default function CameraScreen() {
     }
   };
 
+  const saveImage = async () => {
+    if (image) {
+      try {
+        await MediaLibrary.createAssetAsync(image);
+        alert("Picture Saved");
+        setImage(null);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   if (hasCameraPermission == false) {
     return <Text>Fuck no permissi0n</Text>;
   }
@@ -56,7 +70,46 @@ export default function CameraScreen() {
   return (
     <View style={styles.container}>
       {image ? (
-        <Image source={{ uri: image }} style={styles.camera} />
+        <ImageBackground source={{ uri: image }} style={styles.camera}>
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              alignItems: "center",
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              flex: 1,
+            }}
+          >
+            <MainButton
+              borderRadius={0}
+              icon={<AntDesign name="check" size={20} color="white" />}
+              fontSize={18}
+              ifHalf={true}
+              height={60}
+              color="rgba(0,0,0,0.8)"
+              text="  Retake photo"
+              padding={8}
+              onPress={() => {
+                setImage(null);
+              }}
+            />
+            <MainButton
+              borderRadius={0}
+              icon={<AntDesign name="retweet" size={20} color="white" />}
+              fontSize={18}
+              ifHalf={true}
+              height={60}
+              color="rgba(0,0,0,0.8)"
+              text="  Save photo"
+              padding={8}
+              onPress={() => {
+                saveImage();
+              }}
+            />
+          </View>
+        </ImageBackground>
       ) : (
         <Camera
           style={styles.camera}
@@ -67,13 +120,62 @@ export default function CameraScreen() {
           <View
             style={{
               position: "absolute",
-              bottom: 20,
+              top: 0,
+              alignItems: "center",
+              width: "100%",
+              padding: 14,
+              justifyContent: "space-between",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <MainButton
+              icon={<AntDesign name="retweet" size={32} color="white" />}
+              color="rgba(0,0,0,0)"
+              onPress={() => {
+                setType(
+                  type === CameraType.back ? CameraType.front : CameraType.back
+                );
+              }}
+            />
+            <MainButton
+              icon={
+                <Entypo
+                  name="flash"
+                  size={32}
+                  color={
+                    flash === Camera.Constants.FlashMode.off ? "white" : "grey"
+                  }
+                />
+              }
+              color="rgba(0,0,0,0)"
+              onPress={() => {
+                console.log("sd");
+                setFlash(
+                  flash === Camera.Constants.FlashMode.off
+                    ? Camera.Constants.FlashMode.on
+                    : Camera.Constants.FlashMode.on
+                );
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              position: "absolute",
+              bottom: 0,
               alignItems: "center",
               width: "100%",
             }}
           >
             <MainButton
-              text="Take photo"
+              icon={<AntDesign name="camera" size={24} color="white" />}
+              fontSize={22}
+              width={1000}
+              height={80}
+              color="rgba(0,0,0,0.8)"
+              text="  Take photo"
+              padding={8}
               onPress={() => {
                 takePicture();
               }}
