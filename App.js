@@ -4,7 +4,6 @@ import MapScreen from "./src/screens/MapScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import AboutUsScreen from "./src/screens/AboutUsScreen";
 import MyAnimalsScreen from "./src/screens/MyAnimalsScreen";
-import CameraScreen from "./src/screens/CameraScreen";
 import {
 	SCREEN_SETTINGS,
 	SCREEN_MAP,
@@ -44,22 +43,6 @@ const App = () => {
 					name={SCREEN_MY_ANIMALS}
 					component={MyAnimalsScreen}
 					options={{ title: "My animals" }}
-				/>
-				<Stack.Screen
-					name={SCREEN_CAMERA}
-					component={CameraScreen}
-					options={{ title: "Camera", headerShown: false }}
-				/>
-				{/* ! only for now, it doesn't meet security requirements, in the future it will be a separate navigation for non-authenticated users */}
-				<Stack.Screen
-					name={SCREEN_LOGIN}
-					component={LoginScreen}
-					options={{ title: "Login", headerShown: false }}
-				/>
-				<Stack.Screen
-					name={SCREEN_REGISTER}
-					component={RegisterScreen}
-					options={{ title: "Register", headerShown: false }}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

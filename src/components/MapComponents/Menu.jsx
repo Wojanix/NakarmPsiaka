@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { SafeAreaView, Text, Button, StyleSheet, View } from "react-native";
 
 import {
   SCREEN_ABOUT_US,
-  SCREEN_CAMERA,
   SCREEN_MY_ANIMALS,
   SCREEN_SETTINGS,
 } from "../../constants/strings";
@@ -116,8 +115,5 @@ const styles = StyleSheet.create({
     transforms: {
       transform: [{ translateX: 500 }],
     },
-  },
-  camera: {
-    flex: 1,
   },
 });
