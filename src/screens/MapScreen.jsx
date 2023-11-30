@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { SafeAreaView, Modal } from "react-native";
+import { SafeAreaView, Modal, View, Button } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Menu from "../components/MapComponents/Menu";
 import { animalData } from "../constants/testData";
 import AnimalMenu from "../components/MapComponents/AnimalMenu";
+import MainButton from "../components/MainComponents/MainButton";
+import { SCREEN_LOGIN } from "../constants/strings";
 
 const MapScreen = ({ navigation }) => {
 	const [showAnimalModal, setShowAnimalModal] = useState(false); // state of modal with animal info
@@ -55,6 +57,14 @@ const MapScreen = ({ navigation }) => {
 			</Modal>
 
 			<Menu navigation={navigation} />
+
+			{/* ! TEST BUTTONS, marked for removal */}
+			<View style={{ position: "absolute", top: 20 }}>
+				<Button
+					title="login"
+					onPress={() => navigation.navigate(SCREEN_LOGIN)}
+				/>
+			</View>
 		</SafeAreaView>
 	);
 };
