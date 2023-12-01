@@ -15,8 +15,6 @@ export default function SettingRecord(props) {
   const { text, title, icon, som, index, iconSize, argFunction, color } = props;
   argFunction ? argFunction() : "";
 
-  console.log(argFunction);
-
   const [isEnabled, setIsEnabled] = useState(som);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 

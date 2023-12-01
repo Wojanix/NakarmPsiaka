@@ -43,7 +43,6 @@ export default function CameraScreen({ navigation }) {
     if (cameraRef) {
       try {
         const data = await cameraRef.current.takePictureAsync();
-        console.log(data);
         setImage(data.uri);
       } catch (e) {
         console.log(e);
@@ -55,7 +54,7 @@ export default function CameraScreen({ navigation }) {
     if (image) {
       try {
         await MediaLibrary.createAssetAsync(image);
-        alert("Picture Saved");
+        // alert("Picture Saved");
         setImage(null);
       } catch (e) {
         console.log(e);
@@ -106,6 +105,10 @@ export default function CameraScreen({ navigation }) {
               padding={8}
               onPress={() => {
                 saveImage();
+                navigation.navigate(SCREEN_MAP, {
+                  image,
+                  ifLocation: true,
+                });
               }}
             />
           </View>
@@ -151,7 +154,6 @@ export default function CameraScreen({ navigation }) {
               }
               color="rgba(0,0,0,0)"
               onPress={() => {
-                console.log("sd");
                 setFlash(
                   flash === Camera.Constants.FlashMode.off
                     ? Camera.Constants.FlashMode.on
