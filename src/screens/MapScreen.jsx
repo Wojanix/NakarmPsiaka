@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Modal, Alert } from "react-native";
+import { SafeAreaView, Modal, View, Button } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Menu from "../components/MapComponents/Menu";
 import { animalData } from "../constants/testData";
 import AnimalMenu from "../components/MapComponents/AnimalMenu";
 import * as Location from "expo-location";
+import MainButton from "../components/MainComponents/MainButton";
+import { SCREEN_LOGIN } from "../constants/strings";
 
 const MapScreen = ({ route, navigation }) => {
   const { ifLocation = false, image = "" } = route.params || {};
