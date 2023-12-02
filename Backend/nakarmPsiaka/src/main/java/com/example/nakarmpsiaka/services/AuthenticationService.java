@@ -1,8 +1,11 @@
 package com.example.nakarmpsiaka.services;
 
 import com.example.nakarmpsiaka.constants.HttpMessagesConsts;
+import com.example.nakarmpsiaka.models.entities.Token;
 import com.example.nakarmpsiaka.models.entities.User;
 import com.example.nakarmpsiaka.models.enums.Role;
+import com.example.nakarmpsiaka.models.enums.TokenType;
+import com.example.nakarmpsiaka.models.repositories.TokenRepository;
 import com.example.nakarmpsiaka.models.repositories.UserRepository;
 import com.example.nakarmpsiaka.models.requests.AuthenticationRequest;
 import com.example.nakarmpsiaka.models.requests.RegisterRequest;
@@ -13,12 +16,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository repository;
+    private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -31,7 +36,11 @@ public class AuthenticationService {
                 .role(Role.USER)
                 .build();
         repository.save(user);
+
+        User savedUser = repository.save(user);
         String jwtToken = jwtService.generateToken(user);
+        saveUserToken(savedUser, jwtToken);
+
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -47,8 +56,31 @@ public class AuthenticationService {
         User user = userOptional.get();
 
         String jwtToken = jwtService.generateToken(user);
+        revokeAllUserTokens(user); // it allows only one JWT token to exist, so the user can be logged in only to one device, maybe it will be changed in the future
+        saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    // revokes every token from the user
+    private void revokeAllUserTokens(User user) {
+        List<Token> validUserToken = tokenRepository.findTokensByUser_IdAndRevokedIsFalse(user.getId());
+        if (validUserToken.isEmpty()) return;
+        validUserToken.forEach(token -> {
+            token.setRevoked(true);
+        });
+        tokenRepository.saveAll(validUserToken);
+    }
+
+    // saving user tokens to database
+    private void saveUserToken(User user, String jwtToken) {
+        Token token = Token.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.ACCESS_TOKEN)
+                .revoked(false)
+                .build();
+        tokenRepository.save(token);
     }
 }
