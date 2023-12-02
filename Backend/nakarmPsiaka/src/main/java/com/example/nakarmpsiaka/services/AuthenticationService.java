@@ -10,7 +10,6 @@ import com.example.nakarmpsiaka.models.repositories.UserRepository;
 import com.example.nakarmpsiaka.models.requests.AuthenticationRequest;
 import com.example.nakarmpsiaka.models.requests.RegisterRequest;
 import com.example.nakarmpsiaka.models.responses.AuthenticationResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +17,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +41,8 @@ public class AuthenticationService {
         User savedUser = userRepository.save(user);
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(savedUser, jwtToken);
+        saveUserToken(savedUser, jwtToken, TokenType.ACCESS_TOKEN);
+        saveUserToken(savedUser, refreshToken, TokenType.REFRESH_TOKEN);
 
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
@@ -58,68 +56,80 @@ public class AuthenticationService {
         Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
 
         // shit maybe removed in future
-        if (userOptional.isEmpty()) return AuthenticationResponse.builder().accessToken(HttpMessagesConsts.FORBIDEN).build();
+        if (userOptional.isEmpty())
+            return AuthenticationResponse.builder().accessToken(HttpMessagesConsts.ERROR).build();
         User user = userOptional.get();
 
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
 
         revokeAllUserTokens(user); // it allows only one JWT token to exist, so the user can be logged in only to one device, maybe it will be changed in the future
-        saveUserToken(user, jwtToken);
+        saveUserToken(user, jwtToken, TokenType.ACCESS_TOKEN);
+        saveUserToken(user, refreshToken, TokenType.REFRESH_TOKEN);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
     }
 
-    // revokes every token from the user
+    // revokes every token from the user without refresh tokens
     private void revokeAllUserTokens(User user) {
         List<Token> validUserToken = tokenRepository.findTokensByUser_IdAndRevokedIsFalse(user.getId());
         if (validUserToken.isEmpty()) return;
-        validUserToken.forEach(token -> token.setRevoked(true));
+        validUserToken.forEach(token -> {
+            token.setRevoked(true);
+            if (token.getTokenType() != TokenType.REFRESH_TOKEN) {
+                token.setRevoked(true);
+            }
+        });
         tokenRepository.saveAll(validUserToken);
     }
 
     // saving user tokens to database
-    private void saveUserToken(User user, String jwtToken) {
+    private void saveUserToken(User user, String jwtToken, TokenType tokenType) {
         Token token = Token.builder()
                 .user(user)
                 .token(jwtToken)
-                .tokenType(TokenType.ACCESS_TOKEN)
+                .tokenType(tokenType)
                 .revoked(false)
                 .build();
         tokenRepository.save(token);
     }
 
     // code for refreshing tokens
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public AuthenticationResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         final String authHeader = request.getHeader("Authorization");
         final String refreshToken;
         final String userEmail;
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return;
+            return AuthenticationResponse.builder().accessToken("error").refreshToken("error").build();
         }
 
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
+
             Optional<User> optionalUser = userRepository.findByEmail(userEmail);
-            if (optionalUser.isEmpty()) return;
+            if (optionalUser.isEmpty()) return AuthenticationResponse.builder().accessToken(HttpMessagesConsts.ERROR).refreshToken(HttpMessagesConsts.ERROR).build();
             User user = optionalUser.get();
 
-            // !TODO: place for implementing blacklisting refresh tokens
+            // checks if refresh token hasn't been set to expire
+            boolean isTokenValid = tokenRepository.findByToken(refreshToken)
+                    .map(token -> !token.isRevoked()).orElse(false);
 
-            if (jwtService.isTokenValid(refreshToken, user)) {
+            if (jwtService.isTokenValid(refreshToken, user) && isTokenValid) {
                 String accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
-                saveUserToken(user, accessToken);
-                AuthenticationResponse authResponse = AuthenticationResponse.builder()
+                saveUserToken(user, accessToken, TokenType.ACCESS_TOKEN);
+
+                return AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
                         .build();
-                new ObjectMapper().writeValue(response.getOutputStream(), authResponse); // it streams value to the response from args
             }
         }
+
+        return AuthenticationResponse.builder().accessToken(HttpMessagesConsts.ERROR).refreshToken(HttpMessagesConsts.ERROR).build();
     }
 }
