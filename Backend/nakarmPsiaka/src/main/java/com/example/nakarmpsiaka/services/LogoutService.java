@@ -1,5 +1,6 @@
 package com.example.nakarmpsiaka.services;
 
+import com.example.nakarmpsiaka.models.entities.Token;
 import com.example.nakarmpsiaka.models.repositories.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -7,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,11 +26,13 @@ public class LogoutService implements LogoutHandler {
         }
 
         jwt = authHeader.substring(7);
-        var storedToken = tokenRepository.findByToken(jwt).orElse(null);
+
+        Optional<Token> optionalToken = tokenRepository.findByToken(jwt);
+        if (optionalToken.isEmpty()) return;
+        Token storedToken = optionalToken.get();
+
         // revokes token
-        if (storedToken != null) {
-            storedToken.setRevoked(true);
-            tokenRepository.save(storedToken);
-        }
+        storedToken.setRevoked(true);
+        tokenRepository.save(storedToken);
     }
 }
