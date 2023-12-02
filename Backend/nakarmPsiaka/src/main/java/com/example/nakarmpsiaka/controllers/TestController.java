@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -19,9 +20,16 @@ public class TestController {
 
     @GetMapping
     public ResponseEntity<String> sayHello(@RequestHeader HttpHeaders headers) {
-        String token = Objects.requireNonNull(headers.get("Authorization")).getFirst();
-        String jwt = token.replace("Bearer", "");
+        List<String> authorizationHeaders = headers.get("Authorization");
+
+        if (authorizationHeaders == null || authorizationHeaders.isEmpty()) {
+            return ResponseEntity.badRequest().body("Authorization header is missing");
+        }
+
+        String token = authorizationHeaders.get(0);
+        String jwt = token.replace("Bearer", "").trim();
         String email = jwtService.getUserEmailByToken(jwt);
+
         return ResponseEntity.ok("cześć " + email);
     }
 }

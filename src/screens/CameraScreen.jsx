@@ -8,6 +8,15 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
+import Animated, {
+  BounceInDown,
+  BounceInUp,
+  BounceOutDown,
+  BounceOutUp,
+  FlipOutEasyX,
+  SlideInDown,
+  ZoomInUp,
+} from "react-native-reanimated";
 
 import {
   SCREEN_ABOUT_US,
@@ -67,9 +76,22 @@ export default function CameraScreen({ navigation }) {
   }
   let zmienna = true;
   return (
-    <View style={styles.container}>
+    <Animated.View style={styles.container} entering={BounceInDown}>
       {image ? (
-        <ImageBackground source={{ uri: image }} style={styles.container}>
+        <ImageBackground
+          source={{ uri: image }}
+          style={[
+            styles.container,
+            {
+              transform: [
+                {
+                  scaleX:
+                    type === Camera.Constants.Type.back && type === 0 ? 1 : -1,
+                },
+              ],
+            },
+          ]}
+        >
           <View
             style={{
               position: "absolute",
@@ -79,15 +101,18 @@ export default function CameraScreen({ navigation }) {
               display: "flex",
               flexDirection: "row",
               flex: 1,
+              transform: [
+                { scaleX: type === Camera.Constants.Type.back ? 1 : -1 },
+              ],
             }}
           >
             <MainButton
               borderRadius={0}
-              icon={<AntDesign name="check" size={20} color="white" />}
+              icon={<AntDesign name="retweet" size={20} color="white" />}
               fontSize={18}
               ifHalf={true}
               height={60}
-              color="rgba(0,0,0,0.8)"
+              color="rgba(0,0,0,0.7)"
               text="  Retake photo"
               padding={8}
               onPress={() => {
@@ -96,11 +121,11 @@ export default function CameraScreen({ navigation }) {
             />
             <MainButton
               borderRadius={0}
-              icon={<AntDesign name="retweet" size={20} color="white" />}
+              icon={<AntDesign name="check" size={20} color="white" />}
               fontSize={18}
               ifHalf={true}
               height={60}
-              color="rgba(0,0,0,0.8)"
+              color="rgba(0,0,0,0.7)"
               text="  Save photo"
               padding={8}
               onPress={() => {
@@ -120,6 +145,7 @@ export default function CameraScreen({ navigation }) {
             type={type}
             flashMode={flash}
             ref={cameraRef}
+            zoom={0}
           ></Camera>
           <View
             style={{
@@ -182,6 +208,7 @@ export default function CameraScreen({ navigation }) {
               padding={8}
               onPress={() => {
                 takePicture();
+                console.log(type);
               }}
             />
             <View style={{ position: "absolute", right: 0 }}>
@@ -200,7 +227,7 @@ export default function CameraScreen({ navigation }) {
           </View>
         </View>
       )}
-    </View>
+    </Animated.View>
   );
 }
 
@@ -214,5 +241,7 @@ const styles = StyleSheet.create({
     width: "120%",
     height: "100%",
     position: "absolute",
+    left: "-10%",
   },
+  image: {},
 });
