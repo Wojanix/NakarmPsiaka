@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/test")
@@ -19,9 +17,7 @@ public class TestController {
 
     @GetMapping
     public ResponseEntity<String> sayHello(@RequestHeader HttpHeaders headers) {
-        String token = Objects.requireNonNull(headers.get("Authorization")).getFirst();
-        String jwt = token.replace("Bearer", "");
-        String email = jwtService.getUserEmailByToken(jwt);
+        String email = jwtService.getEmailFromToken(headers);
         return ResponseEntity.ok("cześć " + email);
     }
 }

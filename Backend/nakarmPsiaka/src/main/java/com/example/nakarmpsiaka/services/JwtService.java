@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 
@@ -83,5 +85,11 @@ public class JwtService {
 
     public String getUserEmailByToken(String token) {
         return extractUsername(token);
+    }
+
+    public String getEmailFromToken(HttpHeaders headers) {
+        String token = Objects.requireNonNull(headers.get("Authorization")).getFirst();
+        String jwt = token.replace("Bearer", "");
+        return getUserEmailByToken(jwt);
     }
 }
