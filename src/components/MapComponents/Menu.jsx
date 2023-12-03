@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { SafeAreaView, Text, Button, StyleSheet, View } from "react-native";
 
 import {
@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
 import { AntDesign } from "@expo/vector-icons";
 import { COLOR_PRIMARY } from "../../constants/colors";
 
+import * as Location from "expo-location";
 
 export default function Menu({ navigation }) {
   return (
@@ -115,8 +116,5 @@ const styles = StyleSheet.create({
     transforms: {
       transform: [{ translateX: 500 }],
     },
-  },
-  camera: {
-    flex: 1,
   },
 });

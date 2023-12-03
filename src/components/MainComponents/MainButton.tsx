@@ -18,7 +18,7 @@ const MainButton = ({
   icon = null,
   borderRadius = 20,
   padding = 0,
-  styleArg = {},
+  styleArg,
 }) => {
   return (
     <TouchableOpacity
