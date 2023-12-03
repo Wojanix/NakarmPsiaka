@@ -7,6 +7,7 @@ import AnimalMenu from "../components/MapComponents/AnimalMenu";
 import * as Location from "expo-location";
 import MainButton from "../components/MainComponents/MainButton";
 import { SCREEN_LOGIN, SCREEN_SHELTER } from "../constants/strings";
+import Filters from "../components/MapComponents/Filters";
 
 const MapScreen = ({ route, navigation }) => {
   const { ifLocation = false, image = "" } = route.params || {};
@@ -116,7 +117,7 @@ const MapScreen = ({ route, navigation }) => {
           showAnimalModal={showAnimalModal}
         />
       </Modal>
-
+      <Filters />
       <Menu navigation={navigation} />
     </SafeAreaView>
   );
