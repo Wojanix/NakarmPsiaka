@@ -20,6 +20,9 @@ const MainButton = ({
   borderRadius = 20,
   padding = 0,
   styleArg,
+  borderWidth = 0,
+  borderColor = "",
+  textColor = "white",
 }) => {
   return (
     <TouchableOpacity
@@ -27,7 +30,15 @@ const MainButton = ({
       style={[
         styles.button,
         styleArg,
-        { backgroundColor: color, width, height, borderRadius, padding },
+        {
+          backgroundColor: color,
+          width,
+          height,
+          borderRadius,
+          padding,
+          borderWidth,
+          borderColor,
+        },
         { width: ifHalf ? "50%" : width },
       ]}
     >
@@ -38,7 +49,7 @@ const MainButton = ({
             {
               fontSize,
               lineHeight: height - 2 * padding,
-              color: "white",
+              color: textColor,
             },
           ]}
         >

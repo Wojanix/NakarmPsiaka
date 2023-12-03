@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Button } from "react-native";
+import { View, StyleSheet, Text, Button, ScrollView } from "react-native";
+import MainButton from "../MainComponents/MainButton";
 // import { Button } from "react-native-paper";
 
 const Filters = () => {
-  const filters = ["Species", "Race", "Age", "Localization", "Gender"];
+  const filters = [
+    "Zwierzęta",
+    "Schroniska",
+    "Karmniki",
+    "Niebezpieczne",
+    "Gender",
+  ];
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   const handleFilterClick = (filter) => {
@@ -22,20 +29,33 @@ const Filters = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+    >
       {filters.map((filter) => {
-        // <Button
-        //   key={filter}
-        //   style={[
-        //     styles.filterButton,
-        //     // selectedFilters.includes(filter) && styles.selectedFilter,
-        //   ]}
-        //   onPress={() => handleFilterClick(filter)}
-        //   title={filter}
-        // />;
-        <Text>{filter}</Text>;
+        return (
+          <MainButton
+            styleArg={[
+              styles.filterButton,
+              selectedFilters.includes(filter) && styles.selectedFilter,
+            ]}
+            color="white"
+            textColor="grey"
+            borderWidth={0.3}
+            borderColor="grey"
+            onPress={() => handleFilterClick(filter)}
+            text={"+ " + filter}
+            height={39}
+            fontSize={14}
+            width={"auto"}
+            padding={9}
+            borderRadius={20}
+          />
+        );
       })}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -48,15 +68,12 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "rgba(255,255,255,0.9)",
-    justifyContent: "space-between",
-    height: 60,
-    padding: 8,
+    // justifyContent: "space-between",
+    height: 40,
+    // padding: 8,
   },
   filterButton: {
-    width: 20,
-    height: 20,
-    marginRight: 8,
-    backgroundColor: "red",
+    marginRight: 1,
   },
   selectedFilter: {
     backgroundColor: "#3498db", // Change the background color for the selected state
