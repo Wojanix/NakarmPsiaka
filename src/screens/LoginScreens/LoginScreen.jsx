@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
 	View,
 	Text,
@@ -12,8 +12,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { logo, title } from "../../images/IMAGES";
 import { COLOR_PRIMARY } from "../../constants/colors";
 import { SCREEN_MAP, SCREEN_REGISTER } from "../../constants/strings";
+import { AuthContext } from "../../context/AuthContextProvider";
 
 const LoginScreen = ({ navigation }) => {
+	const { authState } = useContext(AuthContext);
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<LinearGradient
@@ -32,7 +35,7 @@ const LoginScreen = ({ navigation }) => {
 					style={styles.textInput}
 					secureTextEntry={true}
 					placeholder="Hasło"
-					onSubmitEditing={() => navigation.navigate(SCREEN_MAP)}
+					onSubmitEditing={() => console.log("nigger")}
 					autoComplete="email"
 				/>
 

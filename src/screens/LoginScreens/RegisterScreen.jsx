@@ -1,19 +1,40 @@
-import React from "react";
-import {
-	View,
-	Text,
-	StyleSheet,
-	SafeAreaView,
-	Image,
-	TextInput,
-	Pressable,
-} from "react-native";
+import React, { useContext, useState } from "react";
+import { View, Text, StyleSheet, SafeAreaView, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { COLOR_PRIMARY } from "../../constants/colors";
-import { SCREEN_MAP, SCREEN_REGISTER } from "../../constants/strings";
 import MainButton from "../../components/MainComponents/MainButton";
+import { REGISTER_URL } from "./../../constants/urls";
+import { AuthContext } from "../../context/AuthContextProvider";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
+	const { setTokens, setIsAuthenticated } = useContext(AuthContext);
+	if (setTokens === null) return;
+
+	const [registeredUser, setRegisteredUser] = useState({
+		username: null,
+		email: null,
+		password: null,
+	});
+
+	const registerPost = async () => {
+		console.log(REGISTER_URL);
+		const response = await fetch(REGISTER_URL, {
+			method: "POST",
+			body: JSON.stringify(registeredUser),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8",
+			},
+		});
+		const json = await response.json();
+		setTokens(json.accessToken, json.refreshToken);
+		setIsAuthenticated(true);
+	};
+
+	const handleRegister = () => {
+		console.log(registeredUser);
+		registerPost();
+	};
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<LinearGradient
@@ -26,6 +47,12 @@ const LoginScreen = ({ navigation }) => {
 					<TextInput
 						style={styles.textInput}
 						placeholder="michal@mail.com"
+						onChangeText={(text) =>
+							setRegisteredUser({
+								...registeredUser,
+								email: text,
+							})
+						}
 					/>
 				</View>
 				<View>
@@ -33,13 +60,12 @@ const LoginScreen = ({ navigation }) => {
 					<TextInput
 						style={styles.textInput}
 						placeholder="@michalek69"
-					/>
-				</View>
-				<View>
-					<Text>Jaki jest twój numer PESEL?</Text>
-					<TextInput
-						style={styles.textInput}
-						placeholder="123123123123"
+						onChangeText={(text) =>
+							setRegisteredUser({
+								...registeredUser,
+								username: text,
+							})
+						}
 					/>
 				</View>
 				<View>
@@ -48,6 +74,12 @@ const LoginScreen = ({ navigation }) => {
 						style={styles.textInput}
 						placeholder="***********"
 						secureTextEntry={true}
+						onChangeText={(text) =>
+							setRegisteredUser({
+								...registeredUser,
+								password: text,
+							})
+						}
 					/>
 				</View>
 				<View>
@@ -62,7 +94,7 @@ const LoginScreen = ({ navigation }) => {
 					styleArg={{ marginTop: 10 }}
 					text="Zacznij pomagać!"
 					width={200}
-					onPress={() => navigation.navigate(SCREEN_MAP)}
+					onPress={async () => handleRegister()}
 				/>
 			</LinearGradient>
 		</SafeAreaView>

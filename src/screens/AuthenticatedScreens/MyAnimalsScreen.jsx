@@ -6,11 +6,11 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import Animal from "../components/MyAnimalsComponents/Animal";
-import { COLOR_MAIN_BG } from "../constants/colors";
-import { animalData } from "../constants/testData";
-import SkeletonView from "../components/MyAnimalsComponents/SkeletonView";
-import EditAnimal from "../components/MyAnimalsComponents/EditAnimal";
+import Animal from "../../components/MyAnimalsComponents/Animal";
+import { COLOR_MAIN_BG } from "../../constants/colors";
+import { animalData } from "../../constants/testData";
+import SkeletonView from "../../components/MyAnimalsComponents/SkeletonView";
+import EditAnimal from "../../components/MyAnimalsComponents/EditAnimal";
 
 const MyAnimalsScreen = () => {
 	const { container } = styles;
@@ -47,7 +47,8 @@ const MyAnimalsScreen = () => {
 					data={animalData}
 					keyExtractor={(item) => item.id}
 					renderItem={({ item }) => (
-						<Animal
+						<Animal	// const { isAuthenticated } = useContext(AuthContext);
+
 							{...item}
 							setEditId={setEditId}
 							setShowEditComponent={setShowEditComponent}
