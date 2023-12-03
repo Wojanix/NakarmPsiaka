@@ -7,3 +7,7 @@ export const SCREEN_CAMERA = "CameraScreen";
 // login screens
 export const SCREEN_LOGIN = "LoginScreen";
 export const SCREEN_REGISTER = "RegisterScreen";
+
+// secure storage
+export const SECURE_STORAGE_REFRESH_TOKEN = "SECURE_STORAGE_REFRESH_KEY";
+export const SECURE_STORAGE_ACCESS_TOKEN = "SECURE_STORAGE_ACCESS_KEY";

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
 	View,
 	Text,
@@ -9,13 +9,33 @@ import {
 	Pressable,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { logo, title } from "../../images/IMAGES";
+import { logo } from "../../images/IMAGES";
 import { COLOR_PRIMARY } from "../../constants/colors";
-import { SCREEN_MAP, SCREEN_REGISTER } from "../../constants/strings";
+import { SCREEN_REGISTER } from "../../constants/strings";
 import { AuthContext } from "../../context/AuthContextProvider";
+import { LOGIN_URL } from "../../constants/urls";
 
 const LoginScreen = ({ navigation }) => {
-	const { authState } = useContext(AuthContext);
+	const { setTokens, setIsAuthenticated } = useContext(AuthContext);
+	if (setTokens === null) return;
+
+	const [authenticatingUser, setAuthenticatingUser] = useState({
+		username: null,
+		email: null,
+	});
+
+	const loginPost = async () => {
+		const response = await fetch(LOGIN_URL, {
+			method: "POST",
+			body: JSON.stringify(authenticatingUser),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8",
+			},
+		});
+		const json = await response.json();
+		setTokens(json.accessToken, json.refreshToken);
+		setIsAuthenticated(true);
+	};
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -25,18 +45,27 @@ const LoginScreen = ({ navigation }) => {
 				colors={["rgba(167,253,206,1)", "transparent"]}
 				end={{ x: 0.2, y: 0.8 }}>
 				<Image source={logo} style={styles.logo} resizeMode="center" />
-				{/* <Image
-					source={title}
-					style={styles.title}
-					resizeMode="center"
-				/> */}
-				<TextInput style={styles.textInput} placeholder="Email" />
+				<TextInput
+					style={styles.textInput}
+					placeholder="Email"
+					onChangeText={(text) =>
+						setAuthenticatingUser({
+							...authenticatingUser,
+							email: text,
+						})
+					}
+				/>
 				<TextInput
 					style={styles.textInput}
 					secureTextEntry={true}
 					placeholder="Hasło"
-					onSubmitEditing={() => console.log("nigger")}
-					autoComplete="email"
+					onChangeText={(text) =>
+						setAuthenticatingUser({
+							...authenticatingUser,
+							password: text,
+						})
+					}
+					onSubmitEditing={async () => loginPost()}
 				/>
 
 				<View style={styles.registerWrapper}>
