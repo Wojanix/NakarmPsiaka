@@ -111,3 +111,13 @@ export let animalData = [
     imgPath: "",
   },
 ];
+
+export const shelters = [
+  {
+    name: "Koci Azyl-Fundacja św. Franciszka Pomóż Zwierzętom-Naszym Małym Braciom",
+    profesja: "Koty",
+    longitude: 21.113301,
+    latitude: 52.104742,
+    animals: animalData,
+  },
+];

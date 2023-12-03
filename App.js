@@ -12,10 +12,14 @@ import {
   SCREEN_CAMERA,
   SCREEN_LOGIN,
   SCREEN_REGISTER,
+  SCREEN_SHELTER,
+  SCREEN_MONEY,
 } from "./src/constants/strings";
 import LoginScreen from "./src/screens/LoginScreens/LoginScreen";
 import RegisterScreen from "./src/screens/LoginScreens/RegisterScreen";
 import CameraScreen from "./src/screens/CameraScreen";
+import ShelterScreen from "./src/screens/ShelterScreen";
+import MoneyScreen from "./src/screens/MoneyScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +54,16 @@ const App = () => {
           name={SCREEN_CAMERA}
           component={CameraScreen}
           options={{ title: "Camera" }}
+        />
+        <Stack.Screen
+          name={SCREEN_SHELTER}
+          component={ShelterScreen}
+          options={{ title: "Schronisko" }}
+        />
+        <Stack.Screen
+          name={SCREEN_MONEY}
+          component={MoneyScreen}
+          options={{ title: "Pomoż zwierzakom" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

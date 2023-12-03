@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, Modal, View, Button } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Menu from "../components/MapComponents/Menu";
-import { animalData } from "../constants/testData";
+import { animalData, shelters } from "../constants/testData";
 import AnimalMenu from "../components/MapComponents/AnimalMenu";
 import * as Location from "expo-location";
 import MainButton from "../components/MainComponents/MainButton";
-import { SCREEN_LOGIN } from "../constants/strings";
+import { SCREEN_LOGIN, SCREEN_SHELTER } from "../constants/strings";
 
 const MapScreen = ({ route, navigation }) => {
   const { ifLocation = false, image = "" } = route.params || {};
@@ -84,6 +84,21 @@ const MapScreen = ({ route, navigation }) => {
             onPress={() => handleMarkerPress(animal)}
           />
         ))}
+        {shelters.map((shelter, index) => {
+          return (
+            <Marker
+              pinColor="blue"
+              key={index + "chuj"}
+              coordinate={{
+                latitude: shelter.latitude,
+                longitude: shelter.longitude,
+              }}
+              // title={animal.type}
+              // description={animal.breed}
+              onPress={() => navigation.navigate(SCREEN_SHELTER, { shelter })}
+            />
+          );
+        })}
       </MapView>
 
       {/* its a modal, otherwise it triggers rerender of whole map, which has some performance benefits */}

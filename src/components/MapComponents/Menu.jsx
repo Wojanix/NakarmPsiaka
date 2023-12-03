@@ -4,6 +4,7 @@ import { SafeAreaView, Text, Button, StyleSheet, View } from "react-native";
 import {
   SCREEN_ABOUT_US,
   SCREEN_CAMERA,
+  SCREEN_MONEY,
   SCREEN_MY_ANIMALS,
   SCREEN_SETTINGS,
 } from "../../constants/strings";
@@ -25,7 +26,7 @@ export default function Menu({ navigation }) {
         height={55}
         borderRadius={1000}
         padding={5}
-        onPress={() => navigation.navigate(SCREEN_MY_ANIMALS)}
+        onPress={() => navigation.navigate(SCREEN_MONEY)}
         title="My Animals"
         color={"white"}
       />
