@@ -5,6 +5,7 @@ export const SCREEN_SETTINGS = "SettingsScreen";
 export const SCREEN_CAMERA = "CameraScreen";
 export const SCREEN_SHELTER = "ShelterScreen";
 export const SCREEN_MONEY = "MoneyScreen";
+export const SCREEN_SEARCH = "SearchScreen";
 
 // login screens
 export const SCREEN_LOGIN = "LoginScreen";

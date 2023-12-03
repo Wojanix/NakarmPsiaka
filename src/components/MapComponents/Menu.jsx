@@ -6,8 +6,10 @@ import {
   SCREEN_CAMERA,
   SCREEN_MONEY,
   SCREEN_MY_ANIMALS,
+  SCREEN_SEARCH,
   SCREEN_SETTINGS,
 } from "../../constants/strings";
+import { SimpleLineIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import MainButton from "../MainComponents/MainButton";
 import { MaterialCommunityIcons } from "@expo/vector-icons"; // info button
@@ -21,12 +23,14 @@ export default function Menu({ navigation }) {
     <View style={styles.container}>
       <MainButton
         style={styles.button}
-        icon={<FontAwesome name="dollar" size={30} color={COLOR_PRIMARY} />}
+        icon={
+          <SimpleLineIcons name="magnifier" size={24} color={COLOR_PRIMARY} />
+        }
         width={55}
         height={55}
         borderRadius={1000}
         padding={5}
-        onPress={() => navigation.navigate(SCREEN_MONEY)}
+        onPress={() => navigation.navigate(SCREEN_SEARCH)}
         title="My Animals"
         color={"white"}
       />
