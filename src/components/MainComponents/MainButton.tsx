@@ -23,6 +23,7 @@ const MainButton = ({
   borderWidth = 0,
   borderColor = "",
   textColor = "white",
+  paddingVertical = 0,
 }) => {
   return (
     <TouchableOpacity
@@ -38,6 +39,7 @@ const MainButton = ({
           padding,
           borderWidth,
           borderColor,
+          paddingVertical,
         },
         { width: ifHalf ? "50%" : width },
       ]}

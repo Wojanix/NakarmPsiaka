@@ -1,5 +1,5 @@
 // primary color of application
-export const COLOR_PRIMARY = "#BE1048";
+export const COLOR_PRIMARY = "#17a35d";
 
 // main color of background
 export const COLOR_MAIN_BG = "#FFF";

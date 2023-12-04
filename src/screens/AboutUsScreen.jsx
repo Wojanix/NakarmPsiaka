@@ -107,7 +107,7 @@ const AboutUsScreen = () => {
               height={60}
               text=" Visit Our Website"
               onPress={() => {
-                Linking.openURL("http://pornhub.com");
+                // Linking.openURL("http://pornhub.com");
               }}
               icon={<Entypo name="globe" size={20} color="white" />}
             />
