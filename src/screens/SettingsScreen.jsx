@@ -29,25 +29,25 @@ const SettingsScreen = () => {
   const settingsArray = [
     {
       title: "Allow localization",
-      text: "Allows us to sell your soul",
+      text: "Allows us to smile",
       icon: "map-marker",
       som: true,
     },
     {
       title: "Allow localization",
-      text: "Allows us to sell your soul",
+      text: "Allows us to be happy",
       icon: "map-marker",
       som: true,
     },
     {
       title: "Allow everything",
-      text: "Allows us to fuck u rmom",
+      text: "Allows us do nothing",
       icon: "map-marker",
       som: false,
     },
     {
       title: "Allow everything",
-      text: "Allows us to fuck u rmom",
+      text: "Allows us to do everything",
       icon: "map-marker",
       som: true,
     },
@@ -60,7 +60,7 @@ const SettingsScreen = () => {
     },
     {
       title: "Remove my data",
-      text: "Your data won't be removed :D",
+      text: "We love you, really",
       icon: "trash-can",
       iconSize: 42,
       som: false,

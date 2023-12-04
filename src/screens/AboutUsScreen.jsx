@@ -68,7 +68,7 @@ const AboutUsScreen = () => {
           <Image
             style={styles.image}
             source={{
-              uri: "https://images.squarespace-cdn.com/content/v1/5d025635e9e6f00001d604a6/1561427252699-2EMQCKUQ1J49MYTDGQ47/http-%253A%253Awww.comedycentral.com.au%253Asouth-park%253Avideos%253Athe-worst-of-eric-cartman-casa-bonita-clips.jpg?format=500w",
+              uri: "https://cdn.discordapp.com/attachments/883038299135021118/1181324792087982160/image.png?ex=6580a572&is=656e3072&hm=51c479cc86eca9f1254395436059d8e97cc38f405525d037357a9e5edc121ee1&",
             }}
           />
           <View>
